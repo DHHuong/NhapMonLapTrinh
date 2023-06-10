@@ -1,0 +1,87 @@
+//Viết hàm giải phương trình bậc 4 trùng phương ax4 + bx2 + c = 0 (a≠0)
+static void GiaiPhuongTrinhTrungPhuong(double a, double b, double c)
+{
+  double D = b * b - 4 * a * c;
+		
+		if (a==0 && b!=0 && c!=0) 
+				{double A1=Math.Sqrt(-c/b);
+				double A2=-Math.Sqrt(-c/b);
+				if ((-c/b)>0) Console.WriteLine("Phuong trinh co 2 nghiem {0}",A1,A2);
+		    	else Console.WriteLine("Phuong trinh vo nghiem");}
+		if (a==0 && b==0 && c!=0) Console.WriteLine("Phuong trinh vo nghiem");
+		if (a==0 && b==0 && c==0) Console.WriteLine("Phuong trinh vo so nghiem");
+		if (a!=0 && b==0 && c==0 || a==0 && b!=0 && c==0)Console.WriteLine("Phuong trinh co 1 nghiem =0");	
+		if (a!=0 && b!=0 || a!=0 && c!=0)
+			
+		    {if (D<0) Console.WriteLine("Phuong trinh vo nghiem");
+		     if (D==0) 
+				 
+			     {double t = -b/(2*a);
+				  double X1 = Math.Sqrt(t);
+		          double X2 = -Math.Sqrt(t);
+				  if (t<0)  Console.WriteLine("Phuong trinh vo nghiem");
+                  else if (t>=0) 
+					      if (t==0) Console.WriteLine("Phuong trinh 1 co nghiem = 0");
+		                  else Console.WriteLine("Phuong trinh co 2 nghiem {0} {1}", X1, X2);}
+		     if (D>0) 
+			    {double t1 = ((-b + Math.Sqrt(D)) / (2 * a));
+				double t2 = ((-b - Math.Sqrt(D)) / (2 * a));
+				double x1 = Math.Sqrt(t1);
+				double x2 = -Math.Sqrt(t1);
+				double x3 = Math.Sqrt(t2);
+				double x4 = -Math.Sqrt(t2);
+				 if (t1<0 && t2<0) Console.WriteLine("Phuong trinh vo nghiem");
+				 if (t1==0 && t2<0 || t2==0 && t1<0) Console.WriteLine("Phuong trinh 1 co nghiem = 0");
+				 if (t2==0 && t1>0)  	Console.WriteLine("Phuong trinh co 3 nghiem = 0, {0}, {1}", x1, x2);
+				 if (t1==0 && t2>0)  	Console.WriteLine("Phuong trinh co 3 nghiem = 0, {0}, {1}", x3, x4);
+				 if (t1>0 && t2<0) 		Console.WriteLine("Phuong trinh co 2 nghiem = {0}, {1}", x1, x2);
+				 if (t1<0 && t2>0) 		Console.WriteLine("Phuong trinh co 2 nghiem = {0}, {1}", x3, x4);
+				 if (t1>0 && t2>0) 		Console.WriteLine("Phuong trinh co 4 nghiem = {0}, {1}, {2}, {3}", x1, x2, x3, x4);}} 
+}
+//Viết hàm tìm số nguyên tố nhỏ nhất trong mảng một chiều các số nguyên
+static bool LaSoNguyenTo(int n)
+{
+  if (n < 2) return false;
+  for (int i = 2; i <= Math.Sqrt(n); i++)
+  {
+    if (n % i == 0) return false;
+  }
+  return true;
+}
+static int TimMin(int[] A)
+{
+  int minIndex = 0;
+  for (int i = 1; i < A.Length; i++)
+  {
+    if (LaSoNguyenTo(A[i]) && A[i] < A[minIndex])
+     minIndex = i;
+  }
+  return minIndex;
+}
+//Viết hàm tính tổng các phần tử trên biên của ma trận N x M số nguyên
+static int TinhTongBien(int[,] A)
+        {
+            int S = 0;
+            for (int j = 0; j < A.GetLength(1); j++)
+            {
+                S = S + A[0, j] + A[A.GetLength(0) - 1, j];
+            }
+            for (int i = 1; i < A.GetLength(0) - 1; i++)
+            {
+                S = S + A[i, 0] + A[i, A.GetLength(1) - 1];
+            }
+            return S;
+        }
+//Viết hàm tính chu vi đa giác. Bắt buộc sử dụng kiểu dữ liệu tự định nghĩa về Điểm và Đa giác
+ struct ToaDoDiem
+        {
+            public int x;
+            public int y;
+        }
+ static double TinhKhoangCach(ToaDoDiem A, ToaDoDiem B)
+        {
+            int x = B.x - A.x;
+            int y = B.y - A.y;
+            double KC = Math.Sqrt(x * x + y * y);
+            return KC;
+        }
